@@ -22,7 +22,8 @@ This application aims to automate Credit -Scoring processing by providing a summ
 for decision making, also by classifying a company into vulnerable or not and reducing costs and errors. 
 All of these business objectives speed up loan approvals therefore increase the number of approved loans.
 
-## Business objectives of this application are Collecting data concerning the companies from websites through web scraping which is a technique for extracting content 
+## Business objectives :
+The business objectives of this application are Collecting data concerning the companies from websites through web scraping which is a technique for extracting content 
 from websites, via a script or program also extracting financial informations from financial documents (pdf,...) 
 to build our dataset by using Text mining in fact this is technique explore large amounts of unstructured text data and analyze it in order to extract patterns from the 
 text data, and also Natural Language Processing that is an artificial intelligence technologie that allows to understand the human language such as it is spoken.
