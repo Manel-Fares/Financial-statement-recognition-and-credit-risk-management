@@ -1,0 +1,221 @@
+{% extends 'frontend/base.html' %}
+{% block headDashboard %}
+{% load static %}
+      
+
+
+    
+{% endblock %}
+{%block content%}
+
+  
+
+
+            <div class="container-fluid  dashboard-content">
+
+                <!-- ============================================================== -->
+                <!-- pageheader -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="page-header">
+                            <h2 class="pageheader-title">Dashboard for the company {{Name}}</h2>
+                            <p class="pageheader-text"></p>
+                            <div class="page-breadcrumb">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="mb-0">Turnover by year</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <div id="container" style="width: 80%;">
+       									   <canvas id="myChart" width="400" height="400"></canvas>
+                                        </div>
+                                    </div>
+                                 </div>
+                                  
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="mb-0">Active Rentability by year</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <div id="container" style="width: 80%;">
+       									   <canvas id="myLineChart" width="400" height="400"></canvas>
+                                        </div>
+                                    </div>
+                                 </div>
+                                  
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                    	<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="mb-0">Cash Flow Informations</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <div id="container" style="width: 80%;">
+       									   <canvas id="myPolarChart" width="400" height="400"></canvas>
+                                        </div>
+                                    </div>
+                                 </div>
+                                  
+                            </div>
+                        </div>
+                          <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="mb-0">Market Capitalization</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <div class="row">
+                                            <div id="container" style="width: 60%;">
+           									   <img src="{% static 'assets/images/capb2.png' %}" >
+                                            </div>
+                                            <div><h3 class="title">{{capb}} DT</h3></div>
+                                        </div>
+                                    </div>
+                                 </div>
+                                  
+                            </div>
+                        </div>
+                    </div>
+
+
+                <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+                <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+
+
+         
+
+			<script>
+			var ctx = document.getElementById('myChart').getContext('2d');
+			var myChart = new Chart(ctx, {
+			    type: 'bar',
+			    data: {
+			        labels: {{Annee|safe}},
+			        datasets: [{
+			            label: 'Turnover',
+			            data: {{ChiffresAffaires|safe}},
+			            backgroundColor: [
+			                'rgba(255, 99, 132, 0.2)',
+			                'rgba(54, 162, 235, 0.2)',
+			                'rgba(255, 206, 86, 0.2)',
+			                'rgba(75, 192, 192, 0.2)',
+			                'rgba(153, 102, 255, 0.2)',
+			                'rgba(255, 159, 64, 0.2)'
+			            ],
+			            borderColor: [
+			                'rgba(255, 99, 132, 1)',
+			                'rgba(54, 162, 235, 1)',
+			                'rgba(255, 206, 86, 1)',
+			                'rgba(75, 192, 192, 1)',
+			                'rgba(153, 102, 255, 1)',
+			                'rgba(255, 159, 64, 1)'
+			            ],
+			            borderWidth: 1
+			        }]
+			    },
+			    options: {
+			        scales: {
+			            y: {
+			                beginAtZero: false
+			            },
+			            x: {beginAtZero: false}
+			        }
+			    }
+			});
+			</script>
+
+			<script>
+			var ctx2 = document.getElementById('myLineChart').getContext('2d');
+			var myLineChart = new Chart(ctx2, {
+			    type: 'line',
+			    data: {
+			        labels: {{Annee|safe}},
+			        datasets: [{
+			        	axis: 'y',
+			            label: 'Active Rentability',
+			            data: {{Rentability|safe}},
+						fill: false,
+						borderColor: 'rgb(75, 192, 192)',
+						tension: 0.1
+						  },
+
+						  ]
+			    },
+			    options: {
+			        scales: {
+			            y: {
+			                beginAtZero: false
+			            },
+			            x: {beginAtZero: false}
+			        }
+			    }
+			});
+			</script>
+
+			<script>
+			var ctx = document.getElementById('myPolarChart').getContext('2d');
+			var myChart = new Chart(ctx, {
+			    type: 'polarArea',
+			    data: {
+			    labels: [
+				    'Operating Cash Flow',
+				    'Financing Cash Flow',
+				    'Investisement Cash Flow',
+
+				  ],
+				datasets: [{
+				    label: 'Cash Flow',
+				    data: {{polarChart}},
+				    backgroundColor: [
+				      'rgb(255, 99, 132)',
+				      'rgb(75, 192, 192)',
+				      'rgb(255, 205, 86)',
+
+	
+				    ]
+				  }]
+				},
+			   options: {}
+			});
+			</script>
+
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+            <div class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                            Copyright © 2018 Concept. All rights reserved. Dashboard by <a href="https://colorlib.com/wp/">Colorlib</a>.
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+
+   
+    
+{% endblock %}
+

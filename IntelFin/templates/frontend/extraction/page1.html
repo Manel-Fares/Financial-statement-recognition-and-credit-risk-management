@@ -1,0 +1,81 @@
+{% extends 'frontend/base.html' %}
+{% load static %}
+  <section id="intro" class="clearfix">
+{%block intro%}
+
+ <div class="container">
+
+      <div class="intro-img">
+        <img src="{% static 'frontend/img/intro-img.svg' %}" alt="" class="img-fluid">
+      </div>
+
+      <div class="intro-info">
+        <h2>We automate<br><span>your loans</span><br>treatments!</h2>
+        <div>
+          <a href="#about" class="btn-get-started scrollto">Get Started</a>
+          <a href="#services" class="btn-services scrollto">Our Services</a>
+        </div>
+      </div>
+
+    </div>
+ 
+{% endblock %}
+ </section>
+{%block content%}
+
+<!--==========================
+      About Us Section
+============================-->
+    <section id="about">
+      <div class="container">
+
+        <header class="section-header">
+          <h3>STEP ONE</h3>
+          <p>Step one is to download the pdf file.</p>
+        </header>
+
+      
+
+        <div class="row about-extra">
+          <div class="col-lg-6 wow fadeInUp">
+             <form action="upload" method="post" enctype="multipart/form-data">
+   {% csrf_token %}
+<label for="myfile">Select a file:</label>
+
+<input type="file" class="btn btn-outline-primary" name="file" required/>
+
+<input type="submit" class="btn btn-primary" name="save" value="save">
+</form>
+
+            <img src="{% static 'frontend/img/about-extra-1.svg'%}" class="img-fluid" alt="">
+          </div>
+          <div class="col-lg-6 wow fadeInUp pt-5 pt-lg-0">
+            <h4>Download financial documents</h4>
+            <p>
+              Download the financial reports of the company you want to analyze containing the financial statement, income statement and cash flow statement.
+            </p>
+            <p>
+              After the download you will be redirected to the next step.
+            </p>
+          </div>
+          
+        </div>
+
+       
+
+      </div>
+     
+
+    </section><!-- #about -->
+
+<style type="text/css">
+  #etape2
+  {
+    
+  }
+</style>
+
+
+
+
+{% endblock %}

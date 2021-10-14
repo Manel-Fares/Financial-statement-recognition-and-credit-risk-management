@@ -1,0 +1,82 @@
+{% extends 'frontend/base.html' %}
+{% load static %}
+{% block intro%}
+<div class="container">
+
+      <div class="intro-img">
+        <img src="{% static 'frontend/img/3.png' %}" alt="" class="img-fluid">
+      </div>
+
+      <div class="intro-info">
+        <h2>We automate <br><span>your loans  </span><br>treatments!</h2>
+        <div>
+          <a href="/" class="btn-get-started scrollto">Get Started</a>
+          <a href="#services" class="btn-services scrollto">Our Services</a>
+        </div>
+      </div>
+
+    </div>
+{%endblock%}
+{%block content%}
+<!--==========================
+      About Us Section
+============================-->
+    <section id="about">
+      <div class="container">
+
+        <header class="section-header">
+          <h3>STEP THREE</h3>
+          <p>You must click on the extraction button</p>
+        </header>
+
+      
+
+        <div class="row about-extra">
+          <div class="col-lg-6 wow fadeInUp">
+        <div id="adobe-dc-view" style="height: 360px; width: 500px;"></div>
+
+            
+          </div>
+          <div class="col-lg-6 wow fadeInUp pt-5 pt-lg-0">
+            <h4>Data Extraction</h4>
+            <p>
+              At this stage our system extracts the values ​​from the cut documents in order to be able to provide the solvency status of the company..
+            </p>
+            <p>
+              You can at this stage view the pdf containing your financial information only and downloads them.
+            </p>
+          </div>
+ 
+        </div>
+
+       <form action="fonctionExtraction"  >
+  {% csrf_token %}
+<input type="submit" name="extract" class="btn btn-primary btn-lg" value="extract">
+
+</form>
+
+      </div>
+     
+
+    </section><!-- #about -->
+
+   {% if d %} 
+
+
+<script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+<script type="text/javascript">
+  document.addEventListener("adobe_dc_view_sdk.ready", function(){
+    var adobeDCView = new AdobeDC.View({clientId: "282f7d27951444a08e9305b3f62fa903", divId: "adobe-dc-view"});
+    adobeDCView.previewFile({
+      content:{ location: 
+        { url: "http://localhost:8000/shortPDF/{{d}}"}},
+      metaData:{fileName: "{{d}}"}
+    },
+    {
+      embedMode: "SIZED_CONTAINER"
+    });
+  });
+</script>
+  {% endif %} 
+
+{% endblock%}
